@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  kali:
+    build: .
+    image: kali
+    container_name: kali
+    #ports:
+    #  - "4444:4444"
+    volumes:
+      - ./data/work:/work
+      - ./data/log:/var/log
+      - ./data/root/.zsh_history:/root/.zsh_history
