@@ -16,6 +16,9 @@ RUN apt-get install -y kali-linux-headless
 
 ### Basic tools ###
 
+# man
+RUN apt-get install -y man
+
 # pip for python2
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 RUN python2 get-pip.py
@@ -24,8 +27,12 @@ RUN rm get-pip.py
 # pip for python3
 RUN apt-get install -y python3-pip
 
+# Redis tools for redis-cli
+RUN apt-get install -y redis-tools
 
 ### Security tools ###
+
+# Dirsearch
 RUN apt-get install -y dirsearch
 
 # Volatility 2
