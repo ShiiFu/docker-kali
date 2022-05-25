@@ -19,6 +19,9 @@ RUN apt-get install -y kali-linux-headless
 # man
 RUN apt-get install -y man
 
+# fdisk
+RUN apt-get install -y fdisk
+
 # pip for python2
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 RUN python2 get-pip.py
@@ -45,6 +48,9 @@ RUN ln -s /opt/volatility2/vol.py /usr/local/bin/volatility2
 RUN git clone --depth 1 https://github.com/volatilityfoundation/volatility3.git /opt/volatility3
 RUN pip3 install -r /opt/volatility3/requirements-minimal.txt
 RUN ln -s /opt/volatility3/vol.py /usr/local/bin/volatility
+
+# EWF tools
+RUN apt-get install -y ewf-tools
 
 # Wordlist
 RUN apt-get install -y wordlists
