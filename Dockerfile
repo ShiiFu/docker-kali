@@ -52,6 +52,17 @@ RUN ln -s /opt/volatility3/vol.py /usr/local/bin/volatility
 # EWF tools
 RUN apt-get install -y ewf-tools
 
+# Stegano tools
+RUN apt-get install -y steghide
+# stegseek
+RUN git clone --depth 1 https://github.com/RickdeJager/stegseek.git /opt/stegseek
+RUN apt-get install -y libmhash-dev libmcrypt-dev libjpeg-dev zlib1g-dev make g++ cmake
+RUN mkdir /opt/stegseek/build
+WORKDIR /opt/stegseek/build
+RUN cmake -DCMAKE_BUILD_TYPE=Release ..
+RUN make
+RUN make install
+
 # Wordlist
 RUN apt-get install -y wordlists
 RUN gunzip /usr/share/wordlists/rockyou.txt.gz
