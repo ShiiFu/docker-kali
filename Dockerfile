@@ -52,7 +52,10 @@ RUN ln -s /opt/volatility3/vol.py /usr/local/bin/volatility
 # EWF tools
 RUN apt-get install -y ewf-tools
 
-# Stegano tools
+## Stegano tools
+# exiftool
+RUN apt-get install -y libimage-exiftool-perl
+# steghide
 RUN apt-get install -y steghide
 # stegseek
 RUN git clone --depth 1 https://github.com/RickdeJager/stegseek.git /opt/stegseek
