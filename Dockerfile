@@ -43,6 +43,9 @@ RUN git clone --depth 1 https://github.com/volatilityfoundation/volatility /opt/
 RUN sed -i '1s/.*/\#\!\/usr\/bin\/env python2/' /opt/volatility2/vol.py
 RUN chmod u+x /opt/volatility2/vol.py
 RUN ln -s /opt/volatility2/vol.py /usr/local/bin/volatility2
+# Bitlocker plugin
+RUN git clone --depth 1 https://github.com/elceef/bitlocker /opt/vol2-bitlocker
+RUN ln -s /opt/vol2-bitlocker/bitlocker.py /opt/volatility2/volatility/plugins/bitlocker.py
 
 # Volatility 3
 RUN git clone --depth 1 https://github.com/volatilityfoundation/volatility3.git /opt/volatility3
