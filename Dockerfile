@@ -75,7 +75,7 @@ RUN gunzip /usr/share/wordlists/rockyou.txt.gz
 RUN git clone --depth 1 https://github.com/danielmiessler/SecLists.git /usr/share/wordlists/seclists
 
 # Hashcat custom rule
-RUN curl https://github.com/NotSoSecure/password_cracking_rules/blob/master/OneRuleToRuleThemAll.rule -o /usr/share/hashcat/rules/OneRuleToRuleThemAll.rule
+RUN curl https://raw.githubusercontent.com/NotSoSecure/password_cracking_rules/master/OneRuleToRuleThemAll.rule -o /usr/share/hashcat/rules/OneRuleToRuleThemAll.rule
 
 ### Miscellaneous ###
 
