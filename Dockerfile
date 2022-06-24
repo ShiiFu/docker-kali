@@ -55,6 +55,10 @@ RUN ln -s /opt/volatility3/vol.py /usr/local/bin/volatility
 # EWF tools
 RUN apt-get install -y ewf-tools
 
+# Reverse engineering tools
+RUN apt-get install -y gdb
+RUN apt-get install -y ltrace
+
 ## Stegano tools
 # exiftool
 RUN apt-get install -y libimage-exiftool-perl
