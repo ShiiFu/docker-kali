@@ -16,11 +16,8 @@ RUN apt-get install -y kali-linux-headless
 
 ### Basic tools ###
 
-# man
 RUN apt-get install -y man
-
-# fdisk
-RUN apt-get install -y fdisk
+RUN apt-get install -y golang
 
 # pip for python2
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
@@ -38,6 +35,13 @@ RUN apt-get install -y redis-tools
 # Dirsearch
 RUN apt-get install -y dirsearch
 
+# Active Directory tools
+RUN git clone --depth 1 --branch v1.0.3 https://github.com/ropnop/kerbrute.git /opt/kerbrute
+WORKDIR /opt/kerbrute
+RUN sed -i "s/amd64 386/$(dpkg --print-architecture)/g" Makefile
+RUN make linux
+RUN ln -s /opt/kerbrute/dist/kerbrute_linux_$(dpkg --print-architecture) /usr/local/bin/kerbrute
+
 # Volatility 2
 RUN git clone --depth 1 https://github.com/volatilityfoundation/volatility /opt/volatility2
 RUN sed -i '1s/.*/\#\!\/usr\/bin\/env python2/' /opt/volatility2/vol.py
@@ -51,6 +55,9 @@ RUN ln -s /opt/vol2-bitlocker/bitlocker.py /opt/volatility2/volatility/plugins/b
 RUN git clone --depth 1 https://github.com/volatilityfoundation/volatility3.git /opt/volatility3
 RUN pip3 install -r /opt/volatility3/requirements-minimal.txt
 RUN ln -s /opt/volatility3/vol.py /usr/local/bin/volatility
+
+# fdisk
+RUN apt-get install -y fdisk
 
 # EWF tools
 RUN apt-get install -y ewf-tools
