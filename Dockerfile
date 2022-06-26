@@ -64,7 +64,8 @@ RUN apt-get install -y ewf-tools
 
 # Reverse engineering tools
 RUN apt-get install -y gdb
-RUN apt-get install -y ltrace
+# ltrace not available on arm64, ignore error if package not found
+RUN apt-get install -y ltrace; exit 0
 
 ## Stegano tools
 # exiftool
