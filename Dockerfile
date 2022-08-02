@@ -89,6 +89,15 @@ RUN git clone --depth 1 https://github.com/danielmiessler/SecLists.git /usr/shar
 # Hashcat custom rule
 RUN curl https://raw.githubusercontent.com/NotSoSecure/password_cracking_rules/master/OneRuleToRuleThemAll.rule -o /usr/share/hashcat/rules/OneRuleToRuleThemAll.rule
 
+# Android tools
+RUN mkdir /opt/apktool
+RUN curl https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool --output /opt/apktool/apktool
+RUN curl -L https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.6.1.jar --output /opt/apktool/apktool.jar
+RUN chmod u+x /opt/apktool/apktool
+RUN chmod u+x /opt/apktool/apktool.jar
+RUN ln -s /opt/apktool/apktool /usr/local/bin/apktool
+RUN ln -s /opt/apktool/apktool.jar /usr/local/bin/apktool.jar
+
 ### Miscellaneous ###
 
 # Custom terminal
