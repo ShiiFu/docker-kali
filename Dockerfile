@@ -32,8 +32,9 @@ RUN apt-get install -y redis-tools
 
 ### Security tools ###
 
-# Dirsearch
+# Web tools
 RUN apt-get install -y dirsearch
+RUN pip3 install flask-unsign
 
 # Active Directory tools
 RUN git clone --depth 1 --branch v1.0.3 https://github.com/ropnop/kerbrute.git /opt/kerbrute
