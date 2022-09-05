@@ -17,6 +17,7 @@ RUN apt-get install -y kali-linux-headless
 ### Basic tools ###
 
 RUN apt-get install -y man
+RUN apt-get install -y inetutils-ping
 RUN apt-get install -y golang
 
 # pip for python2
