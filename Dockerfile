@@ -19,11 +19,13 @@ RUN apt-get install -y kali-linux-headless
 RUN apt-get install -y man
 RUN apt-get install -y inetutils-ping
 RUN apt-get install -y golang
+RUN apt-get install -y python2 python2.7-dev libpython2-dev
 
 # pip for python2
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 RUN python2 get-pip.py
 RUN rm get-pip.py
+RUN pip2 install setuptools wheel
 
 # pip for python3
 RUN apt-get install -y python3-pip
@@ -49,6 +51,7 @@ RUN git clone --depth 1 https://github.com/volatilityfoundation/volatility /opt/
 RUN sed -i '1s/.*/\#\!\/usr\/bin\/env python2/' /opt/volatility2/vol.py
 RUN chmod u+x /opt/volatility2/vol.py
 RUN ln -s /opt/volatility2/vol.py /usr/local/bin/volatility2
+RUN pip2 install pycryptodome
 # Bitlocker plugin
 RUN git clone --depth 1 https://github.com/elceef/bitlocker /opt/vol2-bitlocker
 RUN ln -s /opt/vol2-bitlocker/bitlocker.py /opt/volatility2/volatility/plugins/bitlocker.py
