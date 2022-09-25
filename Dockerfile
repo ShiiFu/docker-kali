@@ -35,6 +35,9 @@ RUN apt-get install -y redis-tools
 
 ### Security tools ###
 
+# SSH tool
+## SSH-Audit
+RUN pip3 install ssh-audit
 # Web tools
 RUN apt-get install -y dirsearch
 RUN pip3 install flask-unsign
