@@ -41,6 +41,11 @@ RUN pip3 install ssh-audit
 # Web tools
 RUN apt-get install -y dirsearch
 RUN pip3 install flask-unsign
+## Nuclei
+RUN git clone --depth 1 https://github.com/projectdiscovery/nuclei.git /opt/nuclei
+WORKDIR /opt/nuclei/v2/cmd/nuclei
+RUN go build
+RUN mv nuclei /usr/local/bin/
 
 # Active Directory tools
 RUN git clone --depth 1 --branch v1.0.3 https://github.com/ropnop/kerbrute.git /opt/kerbrute
