@@ -41,6 +41,9 @@ RUN pip3 install ssh-audit
 # Web tools
 RUN apt-get install -y dirsearch
 RUN pip3 install flask-unsign
+## testssl
+RUN git clone --depth 1 https://github.com/drwetter/testssl.sh /opt/testssl
+RUN ln -s /opt/testssl/testssl.sh /usr/local/bin/testssl
 ## Nuclei
 RUN git clone --depth 1 https://github.com/projectdiscovery/nuclei.git /opt/nuclei
 WORKDIR /opt/nuclei/v2/cmd/nuclei
