@@ -56,6 +56,8 @@ WORKDIR /opt/kerbrute
 RUN sed -i "s/amd64 386/$(dpkg --print-architecture)/g" Makefile
 RUN make linux
 RUN ln -s /opt/kerbrute/dist/kerbrute_linux_$(dpkg --print-architecture) /usr/local/bin/kerbrute
+# Pwncat
+RUN pip3 install pwncat-cs
 
 # Volatility 2
 RUN git clone --depth 1 https://github.com/volatilityfoundation/volatility /opt/volatility2
