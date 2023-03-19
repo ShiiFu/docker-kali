@@ -33,13 +33,31 @@ RUN apt-get install -y python3-pip
 # Redis tools for redis-cli
 RUN apt-get install -y redis-tools
 
+# tldr
+RUN apt-get install -y tldr
+#RUN tldr -u
+# cheat.sh
+RUN curl -s https://cht.sh/:cht.sh | tee /usr/local/bin/cht.sh && sudo chmod +x /usr/local/bin/cht.sh
+
 ### Security tools ###
+
+# Osint tools
+## SMAP
+RUN go install -v github.com/s0md3v/smap/cmd/smap@latest
+RUN echo "export PATH=$PATH:/root/go/bin" >> /root/.zshrc
+## Holehe
+RUN git clone --depth 1 https://github.com/megadose/holehe.git /opt/holehe
+WORKDIR /opt/holehe
+#RUN python3 setup.py install
 
 # SSH tool
 ## SSH-Audit
 RUN pip3 install ssh-audit
+
 # Web tools
+## dirsearch
 RUN apt-get install -y dirsearch
+## flask-unsign (JWT)
 RUN pip3 install flask-unsign
 ## testssl
 RUN git clone --depth 1 https://github.com/drwetter/testssl.sh /opt/testssl
@@ -51,11 +69,15 @@ RUN go build
 RUN mv nuclei /usr/local/bin/
 
 # Active Directory tools
+## Kerbrute
 RUN git clone --depth 1 --branch v1.0.3 https://github.com/ropnop/kerbrute.git /opt/kerbrute
 WORKDIR /opt/kerbrute
 RUN sed -i "s/amd64 386/$(dpkg --print-architecture)/g" Makefile
 RUN make linux
 RUN ln -s /opt/kerbrute/dist/kerbrute_linux_$(dpkg --print-architecture) /usr/local/bin/kerbrute
+## Bloodhound collector
+RUN pip3 install bloodhound
+
 # Pwncat
 RUN pip3 install pwncat-cs
 
@@ -113,6 +135,9 @@ RUN gem install haiti-hash
 
 # Hashcat custom rule
 RUN curl https://raw.githubusercontent.com/NotSoSecure/password_cracking_rules/master/OneRuleToRuleThemAll.rule -o /usr/share/hashcat/rules/OneRuleToRuleThemAll.rule
+# John the Ripper KoreLogic rules
+#RUN curl https://openwall.info/wiki/_media/john/korelogic-rules-20100801.txt -o /usr/share/john/rules/korelogic-rules.rule
+#RUN cat /usr/share/john/rules/korelogic-rules.rule >> /etc/john/john.conf
 
 # Android tools
 RUN mkdir /opt/apktool
@@ -122,6 +147,10 @@ RUN chmod u+x /opt/apktool/apktool
 RUN chmod u+x /opt/apktool/apktool.jar
 RUN ln -s /opt/apktool/apktool /usr/local/bin/apktool
 RUN ln -s /opt/apktool/apktool.jar /usr/local/bin/apktool.jar
+
+# Cloud tools
+## gcloud CLI
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-cli -y
 
 ### Miscellaneous ###
 
