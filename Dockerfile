@@ -20,6 +20,7 @@ RUN apt-get install -y man
 RUN apt-get install -y inetutils-ping
 RUN apt-get install -y golang
 RUN apt-get install -y python2 python2.7-dev libpython2-dev
+RUN apt-get install -y jq
 
 # pip for python2
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
@@ -67,6 +68,8 @@ RUN git clone --depth 1 https://github.com/projectdiscovery/nuclei.git /opt/nucl
 WORKDIR /opt/nuclei/v2/cmd/nuclei
 RUN go build
 RUN mv nuclei /usr/local/bin/
+RUN git clone https://github.com/az7rb/crt.sh.git /opt/crt.sh && chmod u+x /opt/crt.sh/crt.sh
+RUN ln -s /opt/crt.sh/crt.sh /usr/local/bin/crt.sh
 
 # Active Directory tools
 ## Kerbrute
